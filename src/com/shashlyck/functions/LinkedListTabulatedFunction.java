@@ -15,13 +15,18 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private Node head;
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
-
+        if (xValues.length < 2) {
+            throw new IllegalArgumentException("the number of points is less than two");
+        }
         for (int i = 0; i < xValues.length; i++) {
             this.addNode(xValues[i], yValues[i]);
         }
     }
 
     public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count){
+        if (count < 2) {
+            throw new IllegalArgumentException("the number of points is less than two");
+        }
         if (xFrom > xTo) {
             double xOdds;
             xOdds = xFrom - xTo;
@@ -61,6 +66,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     protected Node getNode(int index) {
+        if (index < 0 || index >= count) {
+            throw new IndexOutOfBoundsException("index out of bounds");
+        }
         Node node;
         if (index > (count / 2)) {
             node = head.prev;
@@ -92,6 +100,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     private Node floorNodeOfX(double x){
+        if (x < head.x) {
+            throw new IllegalArgumentException("the argument x is less than the minimum x in the function");
+        }
         Node node = head;
         for (int i = 0; i < count; i++)
             if (node.x < x) node = node.next;
@@ -116,19 +127,25 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double getX(int index)  {
-
+        if (index < 0 || index >= count) {
+            throw new IndexOutOfBoundsException("index out of bounds");
+        }
         return getNode(index).x;
     }
 
     @Override
     public double getY(int index){
-
+        if (index < 0 || index >= count) {
+            throw new IndexOutOfBoundsException("index y out of bounds");
+        }
         return getNode(index).y;
     }
 
     @Override
     public void setY(int index, double value) {
-
+        if (index < 0 || index >= count) {
+            throw new IndexOutOfBoundsException("index out of bounds");
+        }
         getNode(index).y = value;
     }
 
@@ -160,6 +177,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public int floorIndexOfX(double x){
+        if (x < head.x) {
+            throw new IllegalArgumentException("the argument x is less than the minimum x in the function");
+        }
         Node node;
         node = head;
         for (int i = 0; i < count; i++) {
