@@ -1,5 +1,7 @@
 package com.shashlyck.functions;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction{
     private double[] xValues;
@@ -132,5 +134,23 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction{
     protected double interpolate(double x, int floorIndex) {
 
         return interpolate(x, xValues[floorIndex], xValues[floorIndex + 1], yValues[floorIndex], yValues[floorIndex + 1]);
+    }
+
+    @Override
+    public Iterator<Point> iterator() {
+        return new Iterator<Point>() {
+            int i;
+
+            public boolean hasNext() {
+                return i != count;
+            }
+
+            public Point next() {
+                if (i == count) {
+                    throw new NoSuchElementException();
+                }
+                return new Point(xValues[i], yValues[i++]);
+            }
+        };
     }
 }
