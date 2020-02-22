@@ -2,12 +2,28 @@ package com.shashlyck.operations;
 
 import com.shashlyck.functions.Point;
 import com.shashlyck.functions.TabulatedFunction;
+import com.shashlyck.functions.factory.ArrayTFFactory;
 import com.shashlyck.functions.factory.TabulatedFunctionFactory;
 
 public class TabulatedDifferentialOperator implements DifferentialOperator<TabulatedFunction> {
 
-    TabulatedFunctionFactory functionFactory;
+    TabulatedFunctionFactory factory;
 
+    public TabulatedDifferentialOperator() {
+        this.factory = new ArrayTFFactory();
+    }
+
+    public TabulatedDifferentialOperator(TabulatedFunctionFactory factory) {
+        this.factory = factory;
+    }
+
+    public TabulatedFunctionFactory getFactory() {
+        return factory;
+    }
+
+    public void setFactory(TabulatedFunctionFactory factory) {
+        this.factory = factory;
+    }
     @Override
     public TabulatedFunction derive(TabulatedFunction function) {
         Point[] arrayPoint = TabulatedFunctionOperationService.asPoints(function);
@@ -21,6 +37,6 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
         xValues[xValues.length - 1] = arrayPoint[xValues.length - 1].x;
         yValues[yValues.length - 1] = yValues[yValues.length - 2];
 
-        return functionFactory.create(xValues, yValues);
+        return factory.create(xValues, yValues);
     }
 }

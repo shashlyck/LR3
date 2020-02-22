@@ -3,6 +3,7 @@ package com.shashlyck.io;
 import com.shashlyck.functions.ArrayTabulatedFunction;
 import com.shashlyck.functions.factory.ArrayTFFactory;
 import com.shashlyck.functions.factory.LinkedListTFFactory;
+import com.shashlyck.operations.TabulatedDifferentialOperator;
 
 import java.io.*;
 
@@ -20,9 +21,10 @@ public class TabulatedFunctionFileInputStream {
         }
 
         try {
-            System.out.println("Введите размер и значения функции");
+            System.out.println("Введите размер и значения функции:");
             BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
-            System.out.println(FunctionsIO.readTabulatedFunction(read, new LinkedListTFFactory()).toString());
+            TabulatedDifferentialOperator operator = new TabulatedDifferentialOperator();
+            System.out.println(operator.derive(FunctionsIO.readTabulatedFunction(read, new LinkedListTFFactory())).toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
