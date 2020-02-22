@@ -14,12 +14,12 @@ public class TabulatedFunctionFileOutputStream {
         double[] yValues = {1, 2, 3};
         ArrayTabulatedFunction arrayTabulatedFunction = new ArrayTabulatedFunction(xValues, yValues);
         LinkedListTabulatedFunction linkedListTabulatedFunction = new LinkedListTabulatedFunction(xValues, yValues);
-        try (BufferedOutputStream outputStreamArrayTabulatedFunction = new BufferedOutputStream(new FileOutputStream(new File("output/array function.bin")))) {
+        try (BufferedOutputStream outputStreamArrayTabulatedFunction = new BufferedOutputStream(new FileOutputStream(new File("output\\arrayFunction.bin")))) {
             FunctionsIO.writeTabulatedFunction(outputStreamArrayTabulatedFunction, arrayTabulatedFunction);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try (BufferedOutputStream outputStreamLinkedListTabulatedFunction = new BufferedOutputStream(new FileOutputStream(new File("output/linked list function.bin")))) {
+        try (BufferedOutputStream outputStreamLinkedListTabulatedFunction = new BufferedOutputStream(new FileOutputStream(new File("output\\linkedListFunction.bin")))) {
             FunctionsIO.writeTabulatedFunction(outputStreamLinkedListTabulatedFunction, linkedListTabulatedFunction);
         } catch (IOException e) {
             e.printStackTrace();
