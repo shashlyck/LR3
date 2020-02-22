@@ -17,7 +17,7 @@ public class TabulatedFunctionFileOutputStream {
         try {
             BufferedOutputStream stream =
                     new BufferedOutputStream(new FileOutputStream(
-                            new File("output"+ File.pathSeparator+"arrayFunction.bin")));
+                            new File("output"+ File.separator+"arrayFunction.bin")));
             FunctionsIO.writeTabulatedFunction(stream, arrayTF);
         } catch (IOException e) {
             e.printStackTrace();
@@ -25,7 +25,7 @@ public class TabulatedFunctionFileOutputStream {
         try {
             BufferedOutputStream stream =
                     new BufferedOutputStream(new FileOutputStream(
-                            new File("output"+File.pathSeparator+"linkedListFunction.bin")));
+                            new File("output"+File.separator+"linkedListFunction.bin")));
             FunctionsIO.writeTabulatedFunction(stream, linkedListTF);
         } catch (IOException e) {
             e.printStackTrace();
