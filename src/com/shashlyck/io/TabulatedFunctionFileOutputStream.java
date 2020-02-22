@@ -12,15 +12,21 @@ public class TabulatedFunctionFileOutputStream {
     public static void main(String[] args) {
         double[] xValues = {1, 2, 3};
         double[] yValues = {1, 2, 3};
-        ArrayTabulatedFunction arrayTabulatedFunction = new ArrayTabulatedFunction(xValues, yValues);
-        LinkedListTabulatedFunction linkedListTabulatedFunction = new LinkedListTabulatedFunction(xValues, yValues);
-        try (BufferedOutputStream outputStreamArrayTabulatedFunction = new BufferedOutputStream(new FileOutputStream(new File("output\\arrayFunction.bin")))) {
-            FunctionsIO.writeTabulatedFunction(outputStreamArrayTabulatedFunction, arrayTabulatedFunction);
+        ArrayTabulatedFunction arrayTF = new ArrayTabulatedFunction(xValues, yValues);
+        LinkedListTabulatedFunction linkedListTF = new LinkedListTabulatedFunction(xValues, yValues);
+        try {
+            BufferedOutputStream stream =
+                    new BufferedOutputStream(new FileOutputStream(
+                            new File("output"+ File.pathSeparator+"arrayFunction.bin")));
+            FunctionsIO.writeTabulatedFunction(stream, arrayTF);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try (BufferedOutputStream outputStreamLinkedListTabulatedFunction = new BufferedOutputStream(new FileOutputStream(new File("output\\linkedListFunction.bin")))) {
-            FunctionsIO.writeTabulatedFunction(outputStreamLinkedListTabulatedFunction, linkedListTabulatedFunction);
+        try {
+            BufferedOutputStream stream =
+                    new BufferedOutputStream(new FileOutputStream(
+                            new File("output"+File.pathSeparator+"linkedListFunction.bin")));
+            FunctionsIO.writeTabulatedFunction(stream, linkedListTF);
         } catch (IOException e) {
             e.printStackTrace();
         }
