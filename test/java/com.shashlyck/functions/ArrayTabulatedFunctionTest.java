@@ -1,8 +1,5 @@
 package com.shashlyck.functions;
 
-import com.shashlyck.functions.ArrayTabulatedFunction;
-import com.shashlyck.functions.MathFunction;
-import com.shashlyck.functions.SqrFunction;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
