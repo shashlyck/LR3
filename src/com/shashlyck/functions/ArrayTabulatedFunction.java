@@ -7,14 +7,18 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction{
     private int count;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
-
+        if (xValues.length < 2) {
+            throw new IllegalArgumentException("the number of points is less than two");
+        }
         count = xValues.length;
         this.xValues = Arrays.copyOf(xValues, count);
         this.yValues = Arrays.copyOf(yValues, count);
     }
 
     public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
-
+        if (count < 2) {
+            throw new IllegalArgumentException("the number of points is less than two");
+        }
         this.count = count;
         if (xFrom > xTo) {
             double xOdds;
@@ -51,7 +55,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction{
 
     @Override
     public double getX(int index){
-
+        if (index < 0 || index >= count) {
+            throw new IllegalArgumentException("index went beyond");
+        }
         return xValues[index];
     }
 
@@ -101,7 +107,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction{
 
     @Override
     protected int floorIndexOfX(double x){
-
+        if (x < leftBound()) {
+            throw new IllegalArgumentException("the argument x is less than the minimum x in the function");
+        }
         for (int i = 0; i < count; i++) {
             if (xValues[i] > x) {
                 return i - 1;
