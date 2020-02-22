@@ -46,17 +46,29 @@ public final class FunctionsIO {
         }
         double[] xValues = new double[count];
         double[] yValues = new double[count];
+
         NumberFormat formatter = NumberFormat.getInstance(Locale.forLanguageTag("ru"));
-        String tempString;
+
         for (int i = 0; i < count; i++) {
-            tempString = reader.readLine();
+            String tempString = reader.readLine();
             try {
-                xValues[i] = formatter.parse(tempString.split(" ")[0]).doubleValue();
-                yValues[i] = formatter.parse(tempString.split(" ")[1]).doubleValue();
+                xValues[i] = formatter.parse(" ".split(tempString)[0]).doubleValue();
+                yValues[i] = formatter.parse(" ".split(tempString)[1]).doubleValue();
             } catch (ParseException p) {
                 throw new IOException(p);
             }
         }
         return factory.create(xValues, yValues);
+    }
+
+    public static void serialize(BufferedOutputStream stream, TabulatedFunction function) throws IOException {
+        ObjectOutputStream output = new ObjectOutputStream(stream);
+        output.writeObject(function);
+        output.flush();
+    }
+
+    public static TabulatedFunction deserialize(BufferedInputStream stream)
+            throws IOException, ClassNotFoundException {
+        return (TabulatedFunction) (new ObjectInputStream(stream)).readObject();
     }
 }

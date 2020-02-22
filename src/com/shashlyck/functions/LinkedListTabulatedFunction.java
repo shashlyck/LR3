@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Serializable {
+
+    private static final long serialVersionUID = 7122140614138561734L;
 
     @Override
     public Iterator<Point> iterator() {
